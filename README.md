@@ -12,7 +12,7 @@ For Extract to work, and all that follows, you will need to save the following J
 #### https://itch.io/bundle/1316/games.json
 
 #### IMPORTANT - Save them with the exact following names.
----------
+
 #### 520_games.json
 #### 902_games.json
 #### 1316_games.json
