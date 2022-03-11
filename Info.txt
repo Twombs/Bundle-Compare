@@ -26,3 +26,6 @@ Added a View Options window and choices. The 'Ukraine' bundle is now called 'Ukr
 
 (v1.2)
 No longer need to mess around with editing paths for the JSON files, as the program directory (folder) is now checked for them. Added an extra column of data called 'Have', which is essentially games you have downloaded from the bundles or own elsewhere etc. Initially, the 'Have' column will only contain 'na' (not assigned), but you can manually assign the status via the 'View Options' window, which now has the ability to assign or remove that status, using the new 'Titles' field and the (Y)es and (N)o buttons. Bundles for the selected game are now also shown for each game selected in the new list. I have also added a 'Downloaded' limit filter, which will just show the 'Have' games in the viewer, and if selected save that to a TSV file.
+
+(v1.3)
+The 'Bundles' input fields on the 'View Options' window, are now clickable labels, that will take you to the unique bundle web page for the selected game. On first use of each, you will be prompted to provide the download URL for that bundle.
