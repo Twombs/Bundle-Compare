@@ -15,6 +15,7 @@
 #include <ComboConstants.au3>
 #include <EditConstants.au3>
 #include <StaticConstants.au3>
+#include <ColorConstants.au3>
 #include <Misc.au3>
 #include <File.au3>
 #include <String.au3>
@@ -33,7 +34,7 @@ $itchlist = @ScriptDir & "\Itch Bundles.ini"
 $titfile = @ScriptDir & "\Titles.tsv"
 
 $created = "March 2022"
-$version = "v1.3"
+$version = "v1.4"
 
 $racial = @ScriptDir & "\520_games.json"
 $palestine = @ScriptDir & "\902_games.json"
@@ -131,7 +132,7 @@ EndIf
 Exit
 
 Func ViewerOptions()
-	Local $Button_info, $Button_no, $Button_view, $Button_yes, $Checkbox_save, $Checkbox_view, $Combo_limit, $Combo_sort, $Combo_titles
+	Local $Button_fold, $Button_info, $Button_no, $Button_view, $Button_yes, $Checkbox_save, $Checkbox_view, $Combo_limit, $Combo_sort, $Combo_titles
 	Local $Group_bundles, $Group_down, $Group_limit, $Group_sort, $Group_titles, $Input_down, $Label_palestine, $Label_racial, $Label_ukraine
 	Local $array, $change, $choice, $choices, $game, $GUI_main, $items, $other, $save, $savfile, $tmpfile, $url, $val, $view, $viewfile, $views
 	;
@@ -155,11 +156,14 @@ Func ViewerOptions()
 	GUICtrlSetFont($Button_view, 9, 600)
 	GUICtrlSetTip($Button_view, "View using the Sort and Limit options!")
 	;
-	$Checkbox_save = GUICtrlCreateCheckbox("Save any sorted or limited results to file", 15, 72, 200, 20)
+	$Checkbox_save = GUICtrlCreateCheckbox("Save sorted or limited results to file", 10, 72, 180, 20)
 	GUICtrlSetTip($Checkbox_save, "Save any sorted or limited results to file!")
 	;
-	$Checkbox_view = GUICtrlCreateCheckbox("View with another TAB program", 230, 72, 170, 20)
+	$Checkbox_view = GUICtrlCreateCheckbox("View with another TAB program", 200, 72, 170, 20)
 	GUICtrlSetTip($Checkbox_view, "View results with another (default) TAB program!")
+	;
+	$Button_fold = GuiCtrlCreateButton("", 375, 72, 25, 24, $BS_ICON)
+	GUICtrlSetTip($Button_fold, "Open the program folder!")
 	;
 	$Group_titles = GuiCtrlCreateGroup("Titles", 10, 100, 390, 55)
 	$Combo_titles = GuiCtrlCreateCombo("", 20, 120, 370, 21, $GUI_SS_DEFAULT_COMBO + $CBS_SORT)
@@ -184,6 +188,8 @@ Func ViewerOptions()
 	GUICtrlSetTip($Button_no, "Remove the YES for selected game!")
 	;
 	; SETTINGS
+	GUICtrlSetImage($Button_fold, @SystemDir & "\shell32.dll", -4, 0)
+	;
 	$choices = "none|Titles|Racial Justice|Palestinian Aid|Ukraine Assist"
 	GUICtrlSetData($Combo_sort, $choices, "Titles")
 	;
@@ -426,6 +432,9 @@ Func ViewerOptions()
 					"unique bundle web page for the selected game. On first use of each," & @LF & _
 					"you will be prompted to provide the download URL for that bundle." & @LF & @LF & _
 					"© " & $created & " created by Timboli. " & $version & " update.", 0, $GUI_main)
+			Case $Button_fold
+				; Open the program folder
+				ShellExecute(@ScriptDir)
 			Case $Checkbox_view
 				; View results with another (default) TAB program
 				If GUICtrlRead($Checkbox_view) = $GUI_CHECKED Then
@@ -445,13 +454,42 @@ Func ViewerOptions()
 			Case $Combo_titles
 				; List of game titles
 				$title = GUICtrlRead($Combo_titles)
-				$racial = IniRead($itchlist, $title, "1", "na")
+				If $title = "" Then
+					$racial = ""
+					$palestine = ""
+					$ukraine = ""
+					GUICtrlSetBkColor($Label_racial, $CLR_DEFAULT)
+					GUICtrlSetBkColor($Label_palestine, $CLR_DEFAULT)
+					GUICtrlSetBkColor($Label_ukraine, $CLR_DEFAULT)
+				Else
+					$racial = IniRead($itchlist, $title, "1", "na")
+					If $racial = "na" Then
+						GUICtrlSetBkColor($Label_racial, $COLOR_RED)
+					Else
+						GUICtrlSetBkColor($Label_racial, $COLOR_LIME)
+					EndIf
+					$palestine = IniRead($itchlist, $title, "2", "na")
+					If $palestine = "na" Then
+						GUICtrlSetBkColor($Label_palestine, $COLOR_RED)
+					Else
+						GUICtrlSetBkColor($Label_palestine, $COLOR_LIME)
+					EndIf
+					$ukraine = IniRead($itchlist, $title, "3", "na")
+					If $ukraine = "na" Then
+						GUICtrlSetBkColor($Label_ukraine, $COLOR_RED)
+					Else
+						GUICtrlSetBkColor($Label_ukraine, $COLOR_LIME)
+					EndIf
+				EndIf
 				GUICtrlSetData($Label_racial, $racial)
-				$palestine = IniRead($itchlist, $title, "2", "na")
 				GUICtrlSetData($Label_palestine, $palestine)
-				$ukraine = IniRead($itchlist, $title, "3", "na")
 				GUICtrlSetData($Label_ukraine, $ukraine)
 				$status = IniRead($downfile, $title, "downloaded", "")
+				If $status = "YES" Then
+					GUICtrlSetBkColor($Input_down, $COLOR_YELLOW)
+				Else
+					GUICtrlSetBkColor($Input_down, $CLR_DEFAULT)
+				EndIf
 				GUICtrlSetData($Input_down, $status)
 			Case $Label_ukraine
 				; Go to bundle web page for game

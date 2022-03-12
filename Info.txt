@@ -29,3 +29,6 @@ No longer need to mess around with editing paths for the JSON files, as the prog
 
 (v1.3)
 The 'Bundles' input fields on the 'View Options' window, are now clickable labels, that will take you to the unique bundle web page for the selected game. On first use of each, you will be prompted to provide the download URL for that bundle.
+
+(v1.4)
+Added an 'open' program folder button on the 'View Options' window, plus the 'Bundles' labels now get colored LIME (exist) or RED (no exist) for each bundle the selected game is found in. If a game has been specified as downloaded, getting a YES in that input, it is now colored YELLOW as an additional indicator.
