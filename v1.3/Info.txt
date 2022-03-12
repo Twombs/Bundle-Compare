@@ -1,0 +1,31 @@
+
+For Extract to work, and all that follows, you will need to save the following JSON results to file.
+
+https://itch.io/bundle/520/games.json
+https://itch.io/bundle/902/games.json
+https://itch.io/bundle/1316/games.json
+
+IMPORTANT - Save them with the exact following names.
+---------
+520_games.json
+902_games.json
+1316_games.json
+
+Once you have saved those files to your PC (Windows only), then you will need to place them in the Bundle Compare folder. Once you do that, then you can use the 'Extract' option.
+
+Once 'Extract' has finished, run the 'Bundle Compare' program again, and it will convert the results into a TAB delimited file, which will then display in an Array Viewer. At this point you can sort by title or not.
+
+Subsequent runs of the program, will give you more sort and filter (limit) view options.
+
+
+HISTORY
+-------
+
+(v1.1)
+Added a View Options window and choices. The 'Ukraine' bundle is now called 'Ukraine Assist', to help with sorting and the limit filter. Sort and Limit results can now be saved to file, both as unsorted and sorted (_saved.tsv). Added support to view the TAB delimited files with another program (it may require the '.tsv' extension to be associated with that program, i.e. Microsoft Works Spreadsheet).
+
+(v1.2)
+No longer need to mess around with editing paths for the JSON files, as the program directory (folder) is now checked for them. Added an extra column of data called 'Have', which is essentially games you have downloaded from the bundles or own elsewhere etc. Initially, the 'Have' column will only contain 'na' (not assigned), but you can manually assign the status via the 'View Options' window, which now has the ability to assign or remove that status, using the new 'Titles' field and the (Y)es and (N)o buttons. Bundles for the selected game are now also shown for each game selected in the new list. I have also added a 'Downloaded' limit filter, which will just show the 'Have' games in the viewer, and if selected save that to a TSV file.
+
+(v1.3)
+The 'Bundles' input fields on the 'View Options' window, are now clickable labels, that will take you to the unique bundle web page for the selected game. On first use of each, you will be prompted to provide the download URL for that bundle.
