@@ -32,3 +32,6 @@ The 'Bundles' input fields on the 'View Options' window, are now clickable label
 
 (v1.4)
 Added an 'open' program folder button on the 'View Options' window, plus the 'Bundles' labels now get colored LIME (exist) or RED (no exist) for each bundle the selected game is found in. If a game has been specified as downloaded, getting a YES in that input, it is now colored YELLOW as an additional indicator.
+
+(v1.5)
+Added an EXIT button (for convenience etc), and a COVER button to view the selected game cover image in your browser, plus a WEB button to go to the selected game's web page at Itch.io, and also a GAME DETAIL button to view a brief plurb and what OS platforms are supported. Some other minor improvements.
